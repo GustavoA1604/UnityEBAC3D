@@ -8,7 +8,7 @@ public class StateMachine<T> where T : System.Enum
     public Dictionary<T, StateBase> dictionaryState;
     private StateBase _currentState;
 
-    public void Init()
+    public StateMachine()
     {
         dictionaryState = new Dictionary<T, StateBase>();
     }
