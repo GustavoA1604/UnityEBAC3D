@@ -10,11 +10,11 @@ public class StateBase
     }
     public virtual void OnStateStay(object o = null)
     {
-        Debug.Log("OnStaterStay");
+        Debug.Log("OnStateStay");
     }
     public virtual void OnStateExit(object o = null)
     {
-        Debug.Log("OnStaterExit");
+        Debug.Log("OnStateExit");
     }
 }
 
