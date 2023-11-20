@@ -1294,7 +1294,7 @@ CharacterController:
   m_SlopeLimit: 45
   m_StepOffset: 0.3
   m_SkinWidth: 0.08
-  m_MinMoveDistance: 0.001
+  m_MinMoveDistance: 0
   m_Center: {x: 0, y: 1.5, z: 0}
 --- !u!114 &285527661
 MonoBehaviour:
@@ -1311,7 +1311,10 @@ MonoBehaviour:
   characterController: {fileID: 285527660}
   speed: 20
   turnSpeed: 300
-  gravity: 9.8
+  gravity: 30
+  jumpSpeed: 15
+  keyRun: 304
+  speedRun: 1.5
   animator: {fileID: 518492132}
 --- !u!4 &285527662
 Transform:
@@ -7377,7 +7380,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1500100153}
-  m_LocalRotation: {x: 0.24446768, y: 0.000000018653669, z: -0.0000000047029176, w: 0.9696575}
+  m_LocalRotation: {x: 0.24446768, y: 0.000000018653607, z: -0.0000000047029025, w: 0.9696575}
   m_LocalPosition: {x: 408.06, y: 2.185916, z: 42.26}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -9433,7 +9436,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1839584240}
-  m_LocalRotation: {x: 0.24446768, y: 0.000000018653669, z: -0.0000000047029176, w: 0.9696575}
+  m_LocalRotation: {x: 0.24446768, y: 0.000000018653607, z: -0.0000000047029025, w: 0.9696575}
   m_LocalPosition: {x: 408.06, y: 2.185916, z: 42.26}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
