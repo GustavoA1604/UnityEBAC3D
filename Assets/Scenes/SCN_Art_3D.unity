@@ -1301,6 +1301,7 @@ GameObject:
   - component: {fileID: 285527662}
   - component: {fileID: 285527661}
   - component: {fileID: 285527660}
+  - component: {fileID: 285527663}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -1362,6 +1363,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &285527663
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 285527659}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c9ced8e77402b2b40b425c59cf6b4d0d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gunBase: {fileID: 1685154342}
 --- !u!1001 &288409840
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8132,7 +8146,6 @@ MonoBehaviour:
   prefabProjectile: {fileID: 7234029726390713666, guid: b4d0bad05c2b09f408ca35b18ab2d371, type: 3}
   positionToShoot: {fileID: 284028674}
   timeBetweenShoots: 0.2
-  keyCode: 122
 --- !u!65 &1685154343
 BoxCollider:
   m_ObjectHideFlags: 0
