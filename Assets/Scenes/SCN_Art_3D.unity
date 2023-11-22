@@ -7425,7 +7425,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1500100153}
-  m_LocalRotation: {x: 0.24446768, y: -0.000000018653607, z: 0.0000000047029025, w: 0.9696575}
+  m_LocalRotation: {x: 0.24446768, y: 0.000000018653607, z: -0.0000000047029025, w: 0.9696575}
   m_LocalPosition: {x: 408.06, y: 2.185916, z: 42.26}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -8140,12 +8140,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 1685154340}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 92c2873c5c2e7194da7927da71c636b0, type: 3}
+  m_Script: {fileID: 11500000, guid: 1648528ae8e3b424a99782ec7ad6eb8c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   prefabProjectile: {fileID: 7234029726390713666, guid: b4d0bad05c2b09f408ca35b18ab2d371, type: 3}
   positionToShoot: {fileID: 284028674}
   timeBetweenShoots: 0.2
+  maxShoot: 5
+  timeToReload: 1
 --- !u!65 &1685154343
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -9593,7 +9595,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1839584240}
-  m_LocalRotation: {x: 0.24446768, y: -0.000000018653607, z: 0.0000000047029025, w: 0.9696575}
+  m_LocalRotation: {x: 0.24446768, y: 0.000000018653607, z: -0.0000000047029025, w: 0.9696575}
   m_LocalPosition: {x: 408.06, y: 2.185916, z: 42.26}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
