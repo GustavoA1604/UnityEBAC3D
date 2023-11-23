@@ -5,25 +5,37 @@ using UnityEngine.InputSystem;
 
 public class PlayerAbilityShoot : PlayerAbilityBase
 {
-  public GunBase gunBase;
+  public GunBase prefabGunBase;
+  public Transform gunPosition;
+  private GunBase _currentGun;
 
   protected override void Init()
   {
     base.Init();
 
+    CreateGun();
+
     inputs.Gameplay.Shoot.performed += ctx => StartShoot();
     inputs.Gameplay.Shoot.canceled += ctx => CancelShoot();
+  }
+
+  private void CreateGun()
+  {
+    _currentGun = Instantiate(prefabGunBase, gunPosition);
+    _currentGun.positionToShoot = gunPosition;
+    _currentGun.transform.localPosition = Vector3.zero;
+    _currentGun.transform.localEulerAngles = Vector3.zero;
   }
 
   private void StartShoot()
   {
     Debug.Log("StartShoot");
-    gunBase.StartShoot();
+    _currentGun.StartShoot();
   }
 
   private void CancelShoot()
   {
     Debug.Log("CancelShoot");
-    gunBase.StopShoot();
+    _currentGun.StopShoot();
   }
 }
