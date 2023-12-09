@@ -17,6 +17,17 @@ public class GunShootLimit : GunBase
     GetAllUIs();
   }
 
+  private void OnDisable()
+  {
+    _reloading = false;
+  }
+
+  private void OnEnable()
+  {
+    UpdateUI(maxShoot, maxShoot - _currentShoots);
+    CheckReload();
+  }
+
   protected override IEnumerator ShootCorountine()
   {
     if (_reloading) yield break;
