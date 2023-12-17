@@ -9,6 +9,7 @@ public class EnemyBase : MonoBehaviour
     [SerializeField] private float _currentLife;
 
     [Header("Animation")]
+    [SerializeField] private AnimationBase _animationBase;
     public float startAnimationDuration = .2f;
     public Ease startAnimationEase = Ease.OutBack;
     public bool startWithBornAnimation = true;
@@ -37,7 +38,8 @@ public class EnemyBase : MonoBehaviour
 
     protected virtual void OnKill()
     {
-        Destroy(gameObject);
+        Destroy(gameObject, 3f);
+        PlayAnimationByTrigger(AnimationType.DEATH);
     }
 
     public void OnDamage(float f)
@@ -52,5 +54,10 @@ public class EnemyBase : MonoBehaviour
     private void BornAnimation()
     {
         transform.DOScale(0, startAnimationDuration).SetEase(startAnimationEase).From();
+    }
+
+    public void PlayAnimationByTrigger(AnimationType animationType)
+    {
+        _animationBase.PlayAnimationByTrigger(animationType);
     }
 }
