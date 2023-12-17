@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 
-public class EnemyBase : MonoBehaviour
+public class EnemyBase : MonoBehaviour, IDamageable
 {
     public float startLife = 10f;
     [SerializeField] private float _currentLife;
@@ -44,10 +44,13 @@ public class EnemyBase : MonoBehaviour
 
     public void OnDamage(float f)
     {
-        _currentLife -= f;
-        if (_currentLife <= 0)
+        if (_currentLife > 0)
         {
-            Kill();
+            _currentLife -= f;
+            if (_currentLife <= 0)
+            {
+                Kill();
+            }
         }
     }
 
@@ -59,5 +62,10 @@ public class EnemyBase : MonoBehaviour
     public void PlayAnimationByTrigger(AnimationType animationType)
     {
         _animationBase.PlayAnimationByTrigger(animationType);
+    }
+
+    public void Damage(float damage)
+    {
+        OnDamage(damage);
     }
 }
