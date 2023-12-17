@@ -7,6 +7,8 @@ public class EnemyBase : MonoBehaviour, IDamageable
 {
     public float startLife = 10f;
     [SerializeField] private float _currentLife;
+    public FlashColor flashColor;
+    public ParticleSystem particleSystem;
 
     [Header("Animation")]
     [SerializeField] private AnimationBase _animationBase;
@@ -46,6 +48,8 @@ public class EnemyBase : MonoBehaviour, IDamageable
     {
         if (_currentLife > 0)
         {
+            flashColor?.Flash();
+            particleSystem?.Emit(15);
             _currentLife -= f;
             if (_currentLife <= 0)
             {
