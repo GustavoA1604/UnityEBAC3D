@@ -20,13 +20,15 @@ public class ProjectileBase : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        Debug.Log(collision.transform.tag);
-        Debug.Log(collision.transform.CompareTag("Projectile"));
         if (!collision.transform.CompareTag("Projectile"))
         {
             var damageable = collision.transform.GetComponent<IDamageable>();
-            damageable?.Damage(damage);
-            Debug.Log("Im here");
+            if (damageable != null)
+            {
+                Vector3 dir = collision.transform.position - transform.position;
+                dir = dir.normalized;
+                damageable.Damage(damage, dir);
+            }
             Destroy(gameObject);
         }
     }

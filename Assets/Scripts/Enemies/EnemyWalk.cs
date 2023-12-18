@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 
 public class EnemyWalk : EnemyBase
@@ -19,5 +20,7 @@ public class EnemyWalk : EnemyBase
         }
 
         transform.position = Vector3.MoveTowards(transform.position, wayPoints[_index].transform.position, Time.deltaTime * speed);
+        //transform.LookAt(wayPoints[_index].transform.position);
+        transform.DOLookAt(wayPoints[_index].transform.position, 1f);
     }
 }

@@ -8,7 +8,7 @@ public class EnemyBase : MonoBehaviour, IDamageable
     public float startLife = 10f;
     [SerializeField] private float _currentLife;
     public FlashColor flashColor;
-    public ParticleSystem particleSystem;
+    public ParticleSystem myParticleSystem;
 
     [Header("Animation")]
     [SerializeField] private AnimationBase _animationBase;
@@ -49,7 +49,7 @@ public class EnemyBase : MonoBehaviour, IDamageable
         if (_currentLife > 0)
         {
             flashColor?.Flash();
-            particleSystem?.Emit(15);
+            myParticleSystem?.Emit(15);
             _currentLife -= f;
             if (_currentLife <= 0)
             {
@@ -70,6 +70,14 @@ public class EnemyBase : MonoBehaviour, IDamageable
 
     public void Damage(float damage)
     {
+        OnDamage(damage);
+    }
+
+    public void Damage(float damage, Vector3 dir)
+    {
+        dir.y = 0;
+        dir = dir.normalized;
+        transform.DOMove(transform.position - dir, .1f);
         OnDamage(damage);
     }
 }
