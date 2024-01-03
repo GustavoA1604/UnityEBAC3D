@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : MonoBehaviour
+public class Player : MonoBehaviour, IDamageable
 {
     public CharacterController characterController;
     public float speed = 1f;
@@ -15,6 +15,9 @@ public class Player : MonoBehaviour
     public float speedRun = 1.5f;
 
     public Animator animator;
+
+    [Header("Flash")]
+    public List<FlashColor> flashColors;
 
     void Update()
     {
@@ -52,6 +55,15 @@ public class Player : MonoBehaviour
         characterController.Move(speedVector * Time.deltaTime);
 
         animator.SetBool("Run", inputAxisVertical != 0);
+    }
 
+    public void Damage(float damage)
+    {
+        flashColors.ForEach(i => i.Flash());
+    }
+
+    public void Damage(float damage, Vector3 dir)
+    {
+        Damage(damage);
     }
 }
