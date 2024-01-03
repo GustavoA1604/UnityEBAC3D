@@ -12,8 +12,9 @@ public class EnemyWalk : EnemyBase
     public float minDistance = 1f;
     public float speed = 1f;
 
-    void Update()
+    public override void Update()
     {
+        base.Update();
         if (Vector3.Distance(transform.position, wayPoints[_index].transform.position) < minDistance)
         {
             _index = (_index + 1) % wayPoints.Length;
