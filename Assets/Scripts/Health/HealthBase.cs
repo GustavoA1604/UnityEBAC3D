@@ -1,11 +1,13 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
-public class HealthBase : MonoBehaviour
+public class HealthBase : MonoBehaviour, IDamageable
 {
     public float startLife = 10f;
     public bool destroyOnKill = false;
+    public float knockback = 1f;
     [SerializeField] private float _currentLife;
 
     public Action<HealthBase> OnDamage;
@@ -44,5 +46,16 @@ public class HealthBase : MonoBehaviour
             }
             OnDamage?.Invoke(this);
         }
+    }
+
+    public void Damage(float damage, Vector3 dir)
+    {
+        if (knockback != 0)
+        {
+            dir.y = 0;
+            dir = dir.normalized;
+            transform.DOMove(transform.position + dir * knockback, .1f);
+        }
+        Damage(damage);
     }
 }

@@ -2,9 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : MonoBehaviour, IDamageable
+public class Player : MonoBehaviour
 {
     public CharacterController characterController;
+    public HealthBase healthBase;
     public float speed = 1f;
     public float turnSpeed = 1f;
     public float gravity = 9.8f;
@@ -18,6 +19,23 @@ public class Player : MonoBehaviour, IDamageable
 
     [Header("Flash")]
     public List<FlashColor> flashColors;
+
+    private void OnValidate()
+    {
+        if (characterController == null)
+        {
+            characterController = GetComponent<CharacterController>();
+        }
+        if (healthBase == null)
+        {
+            healthBase = GetComponent<HealthBase>();
+        }
+    }
+
+    private void Awake()
+    {
+        healthBase.OnDamage += OnPlayerDamage;
+    }
 
     void Update()
     {
@@ -57,13 +75,8 @@ public class Player : MonoBehaviour, IDamageable
         animator.SetBool("Run", inputAxisVertical != 0);
     }
 
-    public void Damage(float damage)
+    public void OnPlayerDamage(HealthBase healthBase)
     {
         flashColors.ForEach(i => i.Flash());
-    }
-
-    public void Damage(float damage, Vector3 dir)
-    {
-        Damage(damage);
     }
 }

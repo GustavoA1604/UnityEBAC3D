@@ -13,7 +13,7 @@ public enum BossAction
     DEATH
 }
 
-public class BossBase : MonoBehaviour, IDamageable
+public class BossBase : MonoBehaviour
 {
     [Header("Animation")]
     [SerializeField] private AnimationBase _animationBase;
@@ -82,19 +82,6 @@ public class BossBase : MonoBehaviour, IDamageable
     {
         flashColor?.Flash();
         myParticleSystem?.Emit(15);
-    }
-
-    public void Damage(float damage)
-    {
-        healthBase.Damage(damage);
-    }
-
-    public void Damage(float damage, Vector3 dir)
-    {
-        dir.y = 0;
-        dir = dir.normalized;
-        transform.DOMove(transform.position - dir, .1f);
-        Damage(damage);
     }
 
     public void StartAttack(Action endCallback = null)
