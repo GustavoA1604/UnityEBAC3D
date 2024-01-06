@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class Player : MonoBehaviour
 {
@@ -21,6 +22,9 @@ public class Player : MonoBehaviour
     [Header("Life and Damage")]
     public List<FlashColor> flashColors;
     public HealthBase healthBase;
+
+    [Header("Respawn")]
+    public float timeToRespawn = 2f;
 
     private void OnValidate()
     {
@@ -90,10 +94,23 @@ public class Player : MonoBehaviour
     {
         animator.SetTrigger("Death");
         SetCollidersEnabled(false);
+        Invoke(nameof(Respawn), timeToRespawn);
     }
 
     private void SetCollidersEnabled(bool e)
     {
         colliders.ForEach(i => i.enabled = e);
+    }
+
+    public void Respawn()
+    {
+        healthBase.Init();
+        animator.SetTrigger("Respawn");
+        SetCollidersEnabled(true);
+        if (CheckpointManager.HasCheckpoint())
+        {
+            transform.DOKill();
+            transform.position = CheckpointManager.GetRespawnPosition();
+        }
     }
 }

@@ -68,6 +68,9 @@ public class HealthBase : MonoBehaviour, IDamageable
 
     private void UpdateUI()
     {
-        uIFillUpdaters.ForEach(i => i.UpdateValue(startLife, _currentLife));
+        if (uIFillUpdaters != null)
+        {
+            uIFillUpdaters.ForEach(i => i.UpdateValue(startLife, _currentLife));
+        }
     }
 }
