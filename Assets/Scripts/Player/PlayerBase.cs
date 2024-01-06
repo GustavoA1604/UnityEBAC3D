@@ -59,7 +59,7 @@ public class PlayerStateIdle : PlayerStateBase
 {
     public PlayerStateIdle(PlayerBase player) : base(player) { }
 
-    public override void OnStateStay(object o = null)
+    public override void OnStateStay(params object[] objs)
     {
         UpdateVelocityAndRotationFromInput();
     }
@@ -69,7 +69,7 @@ public class PlayerStateWalking : PlayerStateBase
 {
     public PlayerStateWalking(PlayerBase player) : base(player) { }
 
-    public override void OnStateStay(object o = null)
+    public override void OnStateStay(params object[] objs)
     {
         UpdateVelocityAndRotationFromInput();
     }
