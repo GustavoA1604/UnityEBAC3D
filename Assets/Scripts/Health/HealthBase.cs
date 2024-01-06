@@ -58,4 +58,9 @@ public class HealthBase : MonoBehaviour, IDamageable
         }
         Damage(damage);
     }
+
+    public bool IsDead()
+    {
+        return _currentLife <= 0;
+    }
 }

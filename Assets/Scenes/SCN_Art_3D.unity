@@ -6447,6 +6447,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   characterController: {fileID: 285527660}
   healthBase: {fileID: 285527665}
+  colliders:
+  - {fileID: 285527664}
+  - {fileID: 285527660}
   speed: 20
   turnSpeed: 300
   gravity: 30

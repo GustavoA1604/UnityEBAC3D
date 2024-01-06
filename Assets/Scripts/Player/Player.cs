@@ -6,6 +6,7 @@ public class Player : MonoBehaviour
 {
     public CharacterController characterController;
     public HealthBase healthBase;
+    public List<Collider> colliders;
     public float speed = 1f;
     public float turnSpeed = 1f;
     public float gravity = 9.8f;
@@ -35,16 +36,20 @@ public class Player : MonoBehaviour
     private void Awake()
     {
         healthBase.OnDamage += OnPlayerDamage;
+        healthBase.OnKill += OnPlayerKill;
     }
 
     void Update()
     {
-        transform.Rotate(0, Input.GetAxis("Horizontal") * turnSpeed * Time.deltaTime, 0);
+        if (!healthBase.IsDead())
+        {
+            transform.Rotate(0, Input.GetAxis("Horizontal") * turnSpeed * Time.deltaTime, 0);
+        }
 
         var inputAxisVertical = Input.GetAxis("Vertical");
-        var speedVector = transform.forward * inputAxisVertical * speed;
+        var speedVector = healthBase.IsDead() ? Vector3.zero : transform.forward * inputAxisVertical * speed;
 
-        var isWalking = inputAxisVertical != 0;
+        var isWalking = !healthBase.IsDead() && inputAxisVertical != 0;
         if (isWalking)
         {
             if (Input.GetKey(keyRun))
@@ -61,7 +66,7 @@ public class Player : MonoBehaviour
         if (characterController.isGrounded)
         {
             vSpeed = 0;
-            if (Input.GetKey(KeyCode.Space))
+            if (!healthBase.IsDead() && Input.GetKey(KeyCode.Space))
             {
                 vSpeed = jumpSpeed;
             }
@@ -75,8 +80,19 @@ public class Player : MonoBehaviour
         animator.SetBool("Run", inputAxisVertical != 0);
     }
 
-    public void OnPlayerDamage(HealthBase healthBase)
+    private void OnPlayerDamage(HealthBase h)
     {
         flashColors.ForEach(i => i.Flash());
+    }
+
+    private void OnPlayerKill(HealthBase h)
+    {
+        animator.SetTrigger("Death");
+        SetCollidersEnabled(false);
+    }
+
+    private void SetCollidersEnabled(bool e)
+    {
+        colliders.ForEach(i => i.enabled = e);
     }
 }
