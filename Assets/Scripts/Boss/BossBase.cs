@@ -13,12 +13,14 @@ public enum BossAction
     DEATH
 }
 
-public class BossBase : MonoBehaviour
+public class BossBase : MonoBehaviour, IDamageable
 {
     [Header("Animation")]
+    [SerializeField] private AnimationBase _animationBase;
     public float startAnimationDuration = .5f;
     public Ease startAnimationEase = Ease.OutBack;
     private StateMachine<BossAction> stateMachine;
+    public float timeToDisappearOnKill = 2f;
 
     [Header("Attack")]
     public int attackCount = 5;
@@ -28,6 +30,10 @@ public class BossBase : MonoBehaviour
 
     public float speed = 5f;
     public List<Transform> waypoints;
+    public GunBase gunBase;
+    public FlashColor flashColor;
+    public ParticleSystem myParticleSystem;
+
 
     private void OnValidate()
     {
@@ -35,12 +41,21 @@ public class BossBase : MonoBehaviour
         {
             healthBase = GetComponent<HealthBase>();
         }
+        if (flashColor == null)
+        {
+            flashColor = GetComponent<FlashColor>();
+        }
+        if (_animationBase == null)
+        {
+            _animationBase = GetComponent<AnimationBase>();
+        }
     }
 
     private void Awake()
     {
         Init();
         healthBase.OnKill += OnBossKill;
+        healthBase.OnDamage += OnBossDamage;
     }
 
     private void Init()
@@ -58,6 +73,28 @@ public class BossBase : MonoBehaviour
     private void OnBossKill(HealthBase h)
     {
         SwitchState(BossAction.DEATH);
+        gunBase.StopShoot();
+        _animationBase.PlayAnimationByTrigger(AnimationType.DEATH);
+        Destroy(gameObject, timeToDisappearOnKill);
+    }
+
+    public void OnBossDamage(HealthBase healthBase)
+    {
+        flashColor?.Flash();
+        myParticleSystem?.Emit(15);
+    }
+
+    public void Damage(float damage)
+    {
+        healthBase.Damage(damage);
+    }
+
+    public void Damage(float damage, Vector3 dir)
+    {
+        dir.y = 0;
+        dir = dir.normalized;
+        transform.DOMove(transform.position - dir, .1f);
+        Damage(damage);
     }
 
     public void StartAttack(Action endCallback = null)
@@ -71,7 +108,8 @@ public class BossBase : MonoBehaviour
         while (attacks < attackCount)
         {
             attacks++;
-            transform.DOScale(1.1f, .1f).SetLoops(2, LoopType.Yoyo);
+            gunBase.Shoot();
+            _animationBase.PlayAnimationByTrigger(AnimationType.ATTACK);
             yield return new WaitForSeconds(timeBetweenAttacks);
         }
         endCallback?.Invoke();
@@ -95,6 +133,13 @@ public class BossBase : MonoBehaviour
     public void StartInitAnimation()
     {
         transform.DOScale(0, startAnimationDuration).SetEase(startAnimationEase).From();
+        StartCoroutine(SwitchStateAfter(BossAction.WALK, startAnimationDuration));
+    }
+
+    private IEnumerator SwitchStateAfter(BossAction state, float duration)
+    {
+        yield return new WaitForSeconds(duration);
+        SwitchState(state);
     }
 
     public void SwitchState(BossAction state)

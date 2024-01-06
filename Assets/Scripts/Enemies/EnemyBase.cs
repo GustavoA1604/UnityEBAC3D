@@ -7,7 +7,6 @@ public class EnemyBase : MonoBehaviour, IDamageable
 {
     public float startLife = 10f;
     [SerializeField] private float _currentLife;
-    public bool lookAtPlayer = false;
     public FlashColor flashColor;
     public ParticleSystem myParticleSystem;
 
@@ -18,17 +17,9 @@ public class EnemyBase : MonoBehaviour, IDamageable
     public bool startWithBornAnimation = true;
     public float timeToDisappearOnKill = 1.5f;
 
-
-    private Player _player;
-
     private void Awake()
     {
         Init();
-    }
-
-    private void Start()
-    {
-        _player = GameObject.FindObjectOfType<Player>();
     }
 
     protected void ResetLife()
@@ -102,9 +93,5 @@ public class EnemyBase : MonoBehaviour, IDamageable
 
     public virtual void Update()
     {
-        if (lookAtPlayer)
-        {
-            transform.LookAt(_player.transform.position);
-        }
     }
 }
