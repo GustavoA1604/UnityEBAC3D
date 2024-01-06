@@ -9,7 +9,8 @@ public enum BossAction
     INIT,
     IDLE,
     WALK,
-    ATTACK
+    ATTACK,
+    DEATH
 }
 
 public class BossBase : MonoBehaviour
@@ -23,12 +24,23 @@ public class BossBase : MonoBehaviour
     public int attackCount = 5;
     public float timeBetweenAttacks = .5f;
 
+    public HealthBase healthBase;
+
     public float speed = 5f;
     public List<Transform> waypoints;
+
+    private void OnValidate()
+    {
+        if (healthBase == null)
+        {
+            healthBase = GetComponent<HealthBase>();
+        }
+    }
 
     private void Awake()
     {
         Init();
+        healthBase.OnKill += OnBossKill;
     }
 
     private void Init()
@@ -38,8 +50,14 @@ public class BossBase : MonoBehaviour
         stateMachine.RegisterState(BossAction.INIT, new BossStateInit());
         stateMachine.RegisterState(BossAction.WALK, new BossStateWalk());
         stateMachine.RegisterState(BossAction.ATTACK, new BossStateAttack());
+        stateMachine.RegisterState(BossAction.DEATH, new BossStateDeath());
 
         SwitchState(BossAction.INIT);
+    }
+
+    private void OnBossKill(HealthBase h)
+    {
+        SwitchState(BossAction.DEATH);
     }
 
     public void StartAttack(Action endCallback = null)

@@ -16,6 +16,7 @@ public class EnemyBase : MonoBehaviour, IDamageable
     public float startAnimationDuration = .2f;
     public Ease startAnimationEase = Ease.OutBack;
     public bool startWithBornAnimation = true;
+    public float timeToDisappearOnKill = 1.5f;
 
 
     private Player _player;
@@ -49,7 +50,7 @@ public class EnemyBase : MonoBehaviour, IDamageable
 
     protected virtual void OnKill()
     {
-        Destroy(gameObject, 3f);
+        Destroy(gameObject, timeToDisappearOnKill);
         PlayAnimationByTrigger(AnimationType.DEATH);
     }
 

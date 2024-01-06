@@ -34,6 +34,12 @@ public class BossStateWalk : BossStateBase
     {
         boss.SwitchState(BossAction.ATTACK);
     }
+
+    public override void OnStateExit(params object[] objs)
+    {
+        base.OnStateExit(objs);
+        boss.StopAllCoroutines();
+    }
 }
 
 public class BossStateAttack : BossStateBase
@@ -47,5 +53,19 @@ public class BossStateAttack : BossStateBase
     private void EndCallback()
     {
         boss.SwitchState(BossAction.WALK);
+    }
+
+    public override void OnStateExit(params object[] objs)
+    {
+        base.OnStateExit(objs);
+        boss.StopAllCoroutines();
+    }
+}
+
+public class BossStateDeath : BossStateBase
+{
+    public override void OnStateEnter(params object[] objs)
+    {
+        base.OnStateEnter(objs);
     }
 }
