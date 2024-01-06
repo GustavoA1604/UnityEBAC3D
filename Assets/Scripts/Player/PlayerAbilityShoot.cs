@@ -11,6 +11,7 @@ public class PlayerAbilityShoot : PlayerAbilityBase
   private GunBase _gun2;
   public Transform gunPosition;
   private GunBase _currentGun;
+  public UIFillUpdater uiGunUpdater;
 
   protected override void Init()
   {
@@ -25,7 +26,6 @@ public class PlayerAbilityShoot : PlayerAbilityBase
 
     inputs.Gameplay.Shoot.performed += ctx => StartShoot();
     inputs.Gameplay.Shoot.canceled += ctx => CancelShoot();
-
   }
 
   private void CreateGun(ref GunBase actualGun, ref GunBase prefabGun)
@@ -37,6 +37,12 @@ public class PlayerAbilityShoot : PlayerAbilityBase
       actualGun.transform.localPosition = Vector3.zero;
       actualGun.transform.localEulerAngles = Vector3.zero;
       actualGun.gameObject.SetActive(false);
+
+      if (actualGun is GunShootLimit)
+      {
+        GunShootLimit limitGun = actualGun as GunShootLimit;
+        limitGun.AddUIGunUpdater(uiGunUpdater);
+      }
     }
   }
 

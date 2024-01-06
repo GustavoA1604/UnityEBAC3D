@@ -12,6 +12,7 @@ public class HealthBase : MonoBehaviour, IDamageable
 
     public Action<HealthBase> OnDamage;
     public Action<HealthBase> OnKill;
+    public List<UIFillUpdater> uIFillUpdaters;
 
     private void Awake()
     {
@@ -40,6 +41,7 @@ public class HealthBase : MonoBehaviour, IDamageable
         if (_currentLife > 0)
         {
             _currentLife -= f;
+            UpdateUI();
             if (_currentLife <= 0)
             {
                 Kill();
@@ -62,5 +64,10 @@ public class HealthBase : MonoBehaviour, IDamageable
     public bool IsDead()
     {
         return _currentLife <= 0;
+    }
+
+    private void UpdateUI()
+    {
+        uIFillUpdaters.ForEach(i => i.UpdateValue(startLife, _currentLife));
     }
 }

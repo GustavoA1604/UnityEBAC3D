@@ -5,17 +5,12 @@ using UnityEngine;
 
 public class GunShootLimit : GunBase
 {
-  public List<UIGunUpdater> uIGunUpdaters;
+  public List<UIFillUpdater> uIFillUpdaters;
   public float maxShoot = 5f;
   public float timeToReload = 1f;
 
   private float _currentShoots;
   private bool _reloading = false;
-
-  private void Awake()
-  {
-    GetAllUIs();
-  }
 
   private void OnDisable()
   {
@@ -73,11 +68,14 @@ public class GunShootLimit : GunBase
 
   private void UpdateUI(float max, float current)
   {
-    uIGunUpdaters.ForEach(i => i.UpdateValue(max, current));
+    uIFillUpdaters.ForEach(i => i.UpdateValue(max, current));
   }
 
-  private void GetAllUIs()
+  public void AddUIGunUpdater(UIFillUpdater ui)
   {
-    uIGunUpdaters = GameObject.FindObjectsOfType<UIGunUpdater>().ToList();
+    if (ui != null)
+    {
+      uIFillUpdaters.Add(ui);
+    }
   }
 }

@@ -4,22 +4,23 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    [Header("Movement")]
     public CharacterController characterController;
-    public HealthBase healthBase;
     public List<Collider> colliders;
+    public KeyCode keyRun = KeyCode.LeftShift;
+    public float speedRun = 1.5f;
     public float speed = 1f;
     public float turnSpeed = 1f;
     public float gravity = 9.8f;
     private float vSpeed = 0f;
     public float jumpSpeed = 15f;
-    [Header("Run Setup")]
-    public KeyCode keyRun = KeyCode.LeftShift;
-    public float speedRun = 1.5f;
 
+    [Header("Animation")]
     public Animator animator;
 
-    [Header("Flash")]
+    [Header("Life and Damage")]
     public List<FlashColor> flashColors;
+    public HealthBase healthBase;
 
     private void OnValidate()
     {
