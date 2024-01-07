@@ -46,6 +46,11 @@ public class Player : MonoBehaviour
 
     void Update()
     {
+        if (healthBase.IsDead())
+        {
+            return;
+        }
+
         if (!healthBase.IsDead())
         {
             transform.Rotate(0, Input.GetAxis("Horizontal") * turnSpeed * Time.deltaTime, 0);
@@ -102,15 +107,21 @@ public class Player : MonoBehaviour
         colliders.ForEach(i => i.enabled = e);
     }
 
+    private IEnumerator SetCollidersEnabledAfterTime(bool e, float time)
+    {
+        yield return new WaitForSeconds(time);
+        SetCollidersEnabled(e);
+    }
+
     public void Respawn()
     {
         healthBase.Init();
         animator.SetTrigger("Respawn");
-        SetCollidersEnabled(true);
         if (CheckpointManager.HasCheckpoint())
         {
             transform.DOKill();
             transform.position = CheckpointManager.GetRespawnPosition();
         }
+        StartCoroutine(SetCollidersEnabledAfterTime(true, .05f));
     }
 }
