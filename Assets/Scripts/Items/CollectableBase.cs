@@ -4,16 +4,19 @@ using UnityEngine;
 
 public class CollectableBase : MonoBehaviour
 {
+    public ItemType itemType;
+
     public string compareTag = "Player";
     public ParticleSystem myParticleSystem;
     public GameObject graphicItem;
 
     [Header("Sound")]
     public AudioSource audioSourceOnCollect;
+    private bool _isCollected = false;
 
     private void OnTriggerEnter(Collider collision)
     {
-        if (collision.transform.CompareTag(compareTag))
+        if (collision.transform.CompareTag(compareTag) && !_isCollected)
         {
             Collect();
         }
@@ -22,6 +25,7 @@ public class CollectableBase : MonoBehaviour
 
     protected virtual void Collect()
     {
+        _isCollected = true;
         OnCollect();
         StartCoroutine(HideObject());
     }
@@ -45,6 +49,7 @@ public class CollectableBase : MonoBehaviour
         {
             audioSourceOnCollect?.Play();
         }
+        ItemManager.AddItem(itemType);
     }
 
 }
