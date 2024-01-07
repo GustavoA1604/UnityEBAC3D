@@ -39,7 +39,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6394577408794325323}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1648528ae8e3b424a99782ec7ad6eb8c, type: 3}
   m_Name: 
@@ -48,7 +48,7 @@ MonoBehaviour:
   positionToShoot: {fileID: 0}
   timeBetweenShoots: 0.1
   speed: 100
-  uIGunUpdaters: []
+  uIFillUpdaters: []
   maxShoot: 20
   timeToReload: 0.5
 --- !u!1 &6970734443029618605

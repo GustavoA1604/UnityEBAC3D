@@ -93,6 +93,7 @@ public class Player : MonoBehaviour
     private void OnPlayerDamage(HealthBase h)
     {
         flashColors.ForEach(i => i.Flash());
+        EffectsManager.FlashColorVignette();
     }
 
     private void OnPlayerKill(HealthBase h)
