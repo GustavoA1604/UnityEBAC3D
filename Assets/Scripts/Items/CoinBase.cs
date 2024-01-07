@@ -7,6 +7,6 @@ public class CoinBase : CollectableBase
     protected override void OnCollect()
     {
         base.OnCollect();
-        ItemManager.instance?.AddCoins();
+        ItemManager.AddItem(ItemType.COIN);
     }
 }

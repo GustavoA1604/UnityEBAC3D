@@ -3,16 +3,29 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
+public enum ItemType
+{
+    COIN,
+    LIFE_PACK
+}
+
+[System.Serializable]
+public class ItemSetup
+{
+    public ItemType itemType;
+    public SOInt soInt;
+}
+
 public class ItemManager : MonoBehaviour
 {
-    public static ItemManager instance;
-    public SOInt coins;
+    private static ItemManager _instance;
+    public List<ItemSetup> itemSetups;
 
     void Awake()
     {
-        if (instance == null)
+        if (_instance == null)
         {
-            instance = this;
+            _instance = this;
         }
         else
         {
@@ -27,11 +40,16 @@ public class ItemManager : MonoBehaviour
 
     private void Reset()
     {
-        coins.value = 0;
+        itemSetups.ForEach(i => i.soInt.value = 0);
     }
 
-    public void AddCoins(int number = 1)
+    public static void AddItem(ItemType type, int number = 1)
     {
-        coins.value += number;
+        _instance.itemSetups.Find(i => i.itemType == type).soInt.value += number;
+    }
+
+    public static void RemoveItem(ItemType type, int number = 1)
+    {
+        _instance.itemSetups.Find(i => i.itemType == type).soInt.value -= number;
     }
 }
