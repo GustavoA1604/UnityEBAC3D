@@ -431,7 +431,7 @@ Transform:
   - {fileID: 1981588616}
   - {fileID: 782289177}
   m_Father: {fileID: 72394106}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &43108930
 GameObject:
@@ -502,8 +502,9 @@ GameObject:
   m_Component:
   - component: {fileID: 56509981}
   - component: {fileID: 56509982}
+  - component: {fileID: 56509983}
   m_Layer: 0
-  m_Name: CM vcam2 (1)
+  m_Name: CM_vcam_main
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -516,7 +517,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 56509980}
-  m_LocalRotation: {x: 0.24446768, y: 0.000000018653607, z: -0.0000000047029025, w: 0.9696575}
+  m_LocalRotation: {x: 0.24446768, y: -0.000000018653607, z: 0.0000000047029025, w: 0.9696575}
   m_LocalPosition: {x: -15.975067, y: 18.873968, z: -17.40195}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -559,6 +560,19 @@ MonoBehaviour:
         m_Calls: []
   m_LegacyBlendHint: 0
   m_ComponentOwner: {fileID: 1044540929}
+--- !u!114 &56509983
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 56509980}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b64f9e791236d7548abd45d1ec4c904f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  vcam: {fileID: 56509982}
 --- !u!1001 &66745332
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -653,9 +667,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1500100156}
-  - {fileID: 1839584242}
+  - {fileID: 1251269257}
   - {fileID: 1012681268}
-  - {fileID: 1179709627}
   - {fileID: 322215438}
   - {fileID: 42047187}
   m_Father: {fileID: 0}
@@ -6948,7 +6961,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 72394106}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &330281169
 PrefabInstance:
@@ -14392,7 +14405,7 @@ GameObject:
   - component: {fileID: 782289177}
   - component: {fileID: 782289176}
   m_Layer: 0
-  m_Name: CM vcam2 (3)
+  m_Name: CM_vcam_boss
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -16558,6 +16571,7 @@ GameObject:
   - component: {fileID: 1044540932}
   - component: {fileID: 1044540931}
   - component: {fileID: 1044540930}
+  - component: {fileID: 1044540933}
   m_Layer: 0
   m_Name: cm
   m_TagString: Untagged
@@ -16640,6 +16654,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac0b09e7857660247b1477e93731de29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1044540933
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1044540928}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68bb026fafb42b14791938953eaace77, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_NoiseProfile: {fileID: 11400000, guid: 69ce8388f6785dd4c8c39915efece2f4, type: 2}
+  m_PivotOffset: {x: 0, y: 0, z: 0}
+  m_AmplitudeGain: 0
+  m_FrequencyGain: 0
+  mNoiseOffsets: {x: 40.634277, y: -593.23425, z: -350.04126}
 --- !u!1 &1079490730
 GameObject:
   m_ObjectHideFlags: 0
@@ -17201,8 +17232,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 373000432}
-  m_Father: {fileID: 72394106}
-  m_RootOrder: 3
+  m_Father: {fileID: 1251269257}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1196220682
 PrefabInstance:
@@ -17570,6 +17601,38 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2637970196295525522, guid: 435b8cb32aa668246ad07146724496fd, type: 3}
   m_PrefabInstance: {fileID: 1250497093}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1251269256
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1251269257}
+  m_Layer: 0
+  m_Name: Disabled Cameras
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1251269257
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1251269256}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 1179709627}
+  - {fileID: 1839584242}
+  m_Father: {fileID: 72394106}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1255049521
 GameObject:
   m_ObjectHideFlags: 0
@@ -17761,7 +17824,7 @@ GameObject:
   - component: {fileID: 1279231441}
   - component: {fileID: 1279231442}
   m_Layer: 0
-  m_Name: CM vcam2 (2)
+  m_Name: CM_vcam_death
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -17774,7 +17837,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1279231440}
-  m_LocalRotation: {x: 0.0048311925, y: 0.9951678, z: -0.07006161, w: 0.068623126}
+  m_LocalRotation: {x: 0.0048311986, y: 0.9951678, z: -0.07006165, w: 0.06862317}
   m_LocalPosition: {x: -15.975067, y: 12.873968, z: 2.5980492}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -19276,7 +19339,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1500100153}
-  m_LocalRotation: {x: 0.24446768, y: 0.000000018653607, z: -0.0000000047029025, w: 0.9696575}
+  m_LocalRotation: {x: 0.24446768, y: -0.000000018653607, z: 0.0000000047029025, w: 0.9696575}
   m_LocalPosition: {x: -7.4713745, y: 1.8298016, z: -7.748852}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -31402,7 +31465,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1730039883}
-  m_Father: {fileID: 72394106}
+  m_Father: {fileID: 1251269257}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1841500212 stripped

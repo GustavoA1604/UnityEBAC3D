@@ -94,6 +94,7 @@ public class Player : MonoBehaviour
     {
         flashColors.ForEach(i => i.Flash());
         EffectsManager.FlashColorVignette();
+        ShakeCamera.Shake(3f, 1f, .3f);
     }
 
     private void OnPlayerKill(HealthBase h)
