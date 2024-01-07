@@ -5,6 +5,8 @@ using DG.Tweening;
 
 public class Player : MonoBehaviour
 {
+    public static Player _instance;
+
     [Header("Movement")]
     public CharacterController characterController;
     public List<Collider> colliders;
@@ -40,6 +42,14 @@ public class Player : MonoBehaviour
 
     private void Awake()
     {
+        if (_instance == null)
+        {
+            _instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
         healthBase.OnDamage += OnPlayerDamage;
         healthBase.OnKill += OnPlayerKill;
     }

@@ -53,4 +53,9 @@ public class ItemManager : MonoBehaviour
     {
         _instance.itemSetups.Find(i => i.itemType == type).soInt.value -= number;
     }
+
+    public static ItemSetup GetItem(ItemType type)
+    {
+        return _instance.itemSetups.Find(i => i.itemType == type);
+    }
 }
