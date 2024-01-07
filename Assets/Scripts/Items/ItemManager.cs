@@ -14,11 +14,12 @@ public class ItemSetup
 {
     public ItemType itemType;
     public SOInt soInt;
+    public Sprite icon;
 }
 
 public class ItemManager : MonoBehaviour
 {
-    private static ItemManager _instance;
+    public static ItemManager _instance;
     public List<ItemSetup> itemSetups;
 
     void Awake()
