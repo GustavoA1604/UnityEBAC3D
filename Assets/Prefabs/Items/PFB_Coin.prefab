@@ -76,6 +76,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: becdcfc9661387248a3fe5973aae6fae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  itemType: 0
   compareTag: Player
   myParticleSystem: {fileID: 0}
   graphicItem: {fileID: 4932873078778172067}
@@ -91,7 +92,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 1.2
+  m_Radius: 1.5
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &5238948864125579250
 PrefabInstance:
