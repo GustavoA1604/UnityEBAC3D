@@ -16,6 +16,10 @@ public class ChestBase : MonoBehaviour
     private bool _isPlayerClose = false;
     private bool _isChestOpened = false;
 
+    [Space]
+    public ChestItemBase chestItem;
+
+
     private void OnValidate()
     {
         if (animator == null)
@@ -44,6 +48,18 @@ public class ChestBase : MonoBehaviour
         animator.SetTrigger(animatorTriggerOpen);
         _isChestOpened = true;
         HideNotification();
+        Invoke(nameof(ShowItem), .5f);
+    }
+
+    private void ShowItem()
+    {
+        chestItem.ShowItem();
+        Invoke(nameof(CollectItem), 1f);
+    }
+
+    private void CollectItem()
+    {
+        chestItem.Collect();
     }
 
     public void OnTriggerEnter(Collider other)
