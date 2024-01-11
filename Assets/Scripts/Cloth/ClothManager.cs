@@ -9,7 +9,7 @@ public enum ClothType
 
 public class ClothManager : MonoBehaviour
 {
-    private ClothManager _instance;
+    private static ClothManager _instance;
     public List<ClothSetup> clothSetups;
 
     private void Awake()
@@ -24,9 +24,9 @@ public class ClothManager : MonoBehaviour
         }
     }
 
-    public ClothSetup GetSetupByType(ClothType cloth)
+    public static ClothSetup GetSetupByType(ClothType cloth)
     {
-        return clothSetups.Find(i => i.clothType == cloth);
+        return _instance.clothSetups.Find(i => i.clothType == cloth);
     }
 }
 

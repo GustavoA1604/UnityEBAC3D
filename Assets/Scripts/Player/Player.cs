@@ -27,6 +27,8 @@ public class Player : MonoBehaviour
 
     [Header("Respawn")]
     public float timeToRespawn = 2f;
+    [Header("Cloth")]
+    public ClothChanger clothChanger;
 
     private void OnValidate()
     {
@@ -135,5 +137,29 @@ public class Player : MonoBehaviour
             transform.position = CheckpointManager.GetRespawnPosition();
         }
         StartCoroutine(SetCollidersEnabledAfterTime(true, .05f));
+    }
+
+    public void ChangeSpeed(float speedMultiplier, float duration)
+    {
+        StartCoroutine(ChangeSpeedCoroutine(speedMultiplier, duration));
+    }
+
+    private IEnumerator ChangeSpeedCoroutine(float speedMultiplier, float duration)
+    {
+        speed *= speedMultiplier;
+        yield return new WaitForSeconds(duration);
+        speed /= speedMultiplier;
+    }
+
+    public void ChangeTexture(ClothSetup setup, float duration)
+    {
+        StartCoroutine(ChangeTextureCoroutine(setup, duration));
+    }
+
+    private IEnumerator ChangeTextureCoroutine(ClothSetup setup, float duration)
+    {
+        clothChanger.ChangeTexture(setup);
+        yield return new WaitForSeconds(duration);
+        clothChanger.ResetTexture();
     }
 }
