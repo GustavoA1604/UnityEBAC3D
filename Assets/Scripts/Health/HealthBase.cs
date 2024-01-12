@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using System.Collections;
 
 public class HealthBase : MonoBehaviour, IDamageable
 {
@@ -9,6 +10,7 @@ public class HealthBase : MonoBehaviour, IDamageable
     public bool destroyOnKill = false;
     public float knockback = 1f;
     [SerializeField] private float _currentLife;
+    public float defenseDivider = 1f;
 
     public Action<HealthBase> OnDamage;
     public Action<HealthBase> OnKill;
@@ -41,7 +43,7 @@ public class HealthBase : MonoBehaviour, IDamageable
     {
         if (_currentLife > 0)
         {
-            _currentLife -= f;
+            _currentLife -= f / defenseDivider;
             UpdateUI();
             if (_currentLife <= 0)
             {
@@ -73,5 +75,17 @@ public class HealthBase : MonoBehaviour, IDamageable
         {
             uIFillUpdaters.ForEach(i => i.UpdateValue(startLife, _currentLife));
         }
+    }
+
+    public void ChangeDefense(float defenseDivisorMultiplier, float duration)
+    {
+        StartCoroutine(ChangeDefenseCoroutine(defenseDivisorMultiplier, duration));
+    }
+
+    private IEnumerator ChangeDefenseCoroutine(float defenseDivisorMultiplier, float duration)
+    {
+        defenseDivider *= defenseDivisorMultiplier;
+        yield return new WaitForSeconds(duration);
+        defenseDivider /= defenseDivisorMultiplier;
     }
 }

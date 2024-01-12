@@ -5,6 +5,7 @@ using UnityEngine;
 public enum ClothType
 {
     SPEED,
+    STRONG
 }
 
 public class ClothManager : MonoBehaviour
