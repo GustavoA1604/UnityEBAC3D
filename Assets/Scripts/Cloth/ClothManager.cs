@@ -4,6 +4,7 @@ using UnityEngine;
 
 public enum ClothType
 {
+    NO_EFFECT,
     SPEED,
     STRONG
 }
