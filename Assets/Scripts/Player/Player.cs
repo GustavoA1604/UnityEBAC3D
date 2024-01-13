@@ -17,9 +17,11 @@ public class Player : MonoBehaviour
     public float gravity = 9.8f;
     private float vSpeed = 0f;
     public float jumpSpeed = 15f;
+    private bool _previousIsGrounded;
 
     [Header("Animation")]
     public Animator animator;
+    public float goingDownSpeedAnimationThreshold = 1f;
 
     [Header("Life and Damage")]
     public List<FlashColor> flashColors;
@@ -54,10 +56,12 @@ public class Player : MonoBehaviour
         }
         healthBase.OnDamage += OnPlayerDamage;
         healthBase.OnKill += OnPlayerKill;
+        _previousIsGrounded = characterController.isGrounded;
     }
 
     void Update()
     {
+        animator.SetBool("JumpStarted", false);
         if (healthBase.IsDead())
         {
             return;
@@ -91,12 +95,17 @@ public class Player : MonoBehaviour
             if (!healthBase.IsDead() && Input.GetKey(KeyCode.Space))
             {
                 vSpeed = jumpSpeed;
+                animator.SetBool("JumpStarted", true);
             }
         }
 
         vSpeed -= gravity * Time.deltaTime;
         speedVector.y = vSpeed;
 
+        animator.SetBool("JumpFinished", characterController.isGrounded && !_previousIsGrounded);
+        animator.SetBool("JumpGoingDown", !characterController.isGrounded && vSpeed < -goingDownSpeedAnimationThreshold);
+
+        _previousIsGrounded = characterController.isGrounded;
         characterController.Move(speedVector * Time.deltaTime);
 
         animator.SetBool("Run", inputAxisVertical != 0);

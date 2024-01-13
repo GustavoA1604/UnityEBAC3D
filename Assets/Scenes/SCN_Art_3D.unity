@@ -6911,6 +6911,7 @@ MonoBehaviour:
   gravity: 30
   jumpSpeed: 15
   animator: {fileID: 518492132}
+  goingDownSpeedAnimationThreshold: 5
   flashColors:
   - {fileID: 1459504740}
   - {fileID: 751824559}
