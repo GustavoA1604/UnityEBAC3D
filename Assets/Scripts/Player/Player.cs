@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using System;
 
 public class Player : MonoBehaviour
 {
@@ -22,6 +23,7 @@ public class Player : MonoBehaviour
     [Header("Animation")]
     public Animator animator;
     public float goingDownSpeedAnimationThreshold = 1f;
+    public ParticleSystem dustParticleSystem;
 
     [Header("Life and Damage")]
     public List<FlashColor> flashColors;
@@ -62,6 +64,11 @@ public class Player : MonoBehaviour
     void Update()
     {
         animator.SetBool("JumpStarted", false);
+        if (dustParticleSystem != null)
+        {
+            var emission = dustParticleSystem.emission;
+            emission.enabled = !healthBase.IsDead() && characterController.isGrounded;
+        }
         if (healthBase.IsDead())
         {
             return;
