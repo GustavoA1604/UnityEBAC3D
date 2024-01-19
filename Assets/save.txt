@@ -1,0 +1,1 @@
+{"lastCheckpoint":0,"playerHealth":10.0,"clothSetup":{"clothType":2,"texture":{"instanceID":18196}},"clothSetupDuration":10.527774810791016}

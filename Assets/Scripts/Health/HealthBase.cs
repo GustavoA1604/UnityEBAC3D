@@ -30,6 +30,18 @@ public class HealthBase : MonoBehaviour, IDamageable
         _currentLife = startLife;
         UpdateUI();
     }
+
+    public float GetCurrentLife()
+    {
+        return _currentLife;
+    }
+
+    public void SetCurrentLife(float val)
+    {
+        _currentLife = val;
+        UpdateUI();
+    }
+
     protected virtual void Kill()
     {
         if (destroyOnKill)

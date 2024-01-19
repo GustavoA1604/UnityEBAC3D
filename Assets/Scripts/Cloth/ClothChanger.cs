@@ -10,25 +10,55 @@ public class ClothChanger : MonoBehaviour
     public string shaderIdName = "_EmissionMap";
 
     private Texture2D _defaultTexture;
+    private float _currrentTextureCounter = 0;
+    private ClothSetup _currentSetup = null;
 
     private void Awake()
     {
         _defaultTexture = (Texture2D)mesh.materials[0].GetTexture(shaderIdName);
     }
 
-    [NaughtyAttributes.Button]
-    private void ChangeTexture()
+    private void Update()
     {
-        mesh.materials[0].SetTexture(shaderIdName, texture);
+        if (_currrentTextureCounter > 0)
+        {
+            _currrentTextureCounter -= Time.deltaTime;
+            if (_currrentTextureCounter < 0)
+            {
+                ResetTexture();
+                _currrentTextureCounter = 0;
+            }
+        }
     }
 
-    public void ChangeTexture(ClothSetup setup)
+    private void SetTexture(ClothSetup setup)
     {
         mesh.materials[0].SetTexture(shaderIdName, setup.texture);
     }
 
-    public void ResetTexture()
+    private void ResetTexture()
     {
         mesh.materials[0].SetTexture(shaderIdName, _defaultTexture);
+        _currentSetup = null;
+    }
+
+    public void ChangeTexture(ClothSetup setup, float duration)
+    {
+        if (duration > 0)
+        {
+            SetTexture(setup);
+            _currrentTextureCounter = duration;
+            _currentSetup = setup;
+        }
+    }
+
+    public ClothSetup GetCurrentClothSetup()
+    {
+        return _currentSetup;
+    }
+
+    public float GetCurrentDuration()
+    {
+        return _currrentTextureCounter;
     }
 }

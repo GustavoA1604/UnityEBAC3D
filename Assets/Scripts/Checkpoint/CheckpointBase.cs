@@ -34,7 +34,7 @@ public class CheckpointBase : MonoBehaviour
     SaveCheckpoint();
   }
 
-  private void TurnOff()
+  public void TurnOff()
   {
     meshRenderer.material.SetColor("_EmissionColor", new Color(.001f, .001f, .001f));
     _isEnabled = false;

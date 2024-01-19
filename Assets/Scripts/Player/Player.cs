@@ -19,6 +19,7 @@ public class Player : MonoBehaviour
     private float vSpeed = 0f;
     public float jumpSpeed = 15f;
     private bool _previousIsGrounded;
+    private Vector3 _initialPosition;
 
     [Header("Animation")]
     public Animator animator;
@@ -59,6 +60,11 @@ public class Player : MonoBehaviour
         healthBase.OnDamage += OnPlayerDamage;
         healthBase.OnKill += OnPlayerKill;
         _previousIsGrounded = characterController.isGrounded;
+    }
+
+    private void Start()
+    {
+        _initialPosition = transform.position;
     }
 
     void Update()
@@ -118,6 +124,20 @@ public class Player : MonoBehaviour
         animator.SetBool("Run", inputAxisVertical != 0);
     }
 
+    public Vector3 GetInitialPosition()
+    {
+        return _initialPosition;
+    }
+
+    public void MoveToPosition(Vector3 desiredPosition)
+    {
+        //Vector3 offset = desiredPosition - transform.position;
+        //characterController.Move(offset);
+        characterController.enabled = false;
+        transform.position = desiredPosition;
+        characterController.enabled = true;
+    }
+
     private void OnPlayerDamage(HealthBase h)
     {
         flashColors.ForEach(i => i.Flash());
@@ -143,15 +163,17 @@ public class Player : MonoBehaviour
         SetCollidersEnabled(e);
     }
 
+    public void RespawnInCheckpoint()
+    {
+        transform.DOKill();
+        MoveToPosition(CheckpointManager.GetRespawnPosition());
+    }
+
     public void Respawn()
     {
         healthBase.Init();
         animator.SetTrigger("Respawn");
-        if (CheckpointManager.HasCheckpoint())
-        {
-            transform.DOKill();
-            transform.position = CheckpointManager.GetRespawnPosition();
-        }
+        RespawnInCheckpoint();
         StartCoroutine(SetCollidersEnabledAfterTime(true, .05f));
     }
 
@@ -165,17 +187,5 @@ public class Player : MonoBehaviour
         speed *= speedMultiplier;
         yield return new WaitForSeconds(duration);
         speed /= speedMultiplier;
-    }
-
-    public void ChangeTexture(ClothSetup setup, float duration)
-    {
-        StartCoroutine(ChangeTextureCoroutine(setup, duration));
-    }
-
-    private IEnumerator ChangeTextureCoroutine(ClothSetup setup, float duration)
-    {
-        clothChanger.ChangeTexture(setup);
-        yield return new WaitForSeconds(duration);
-        clothChanger.ResetTexture();
     }
 }

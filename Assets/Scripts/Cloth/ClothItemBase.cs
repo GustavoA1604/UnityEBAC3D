@@ -31,7 +31,7 @@ public class ClothItemBase : MonoBehaviour
         OnCollect();
 
         var setup = ClothManager.GetSetupByType(clothType);
-        Player._instance.ChangeTexture(setup, powerUpDuration);
+        Player._instance.clothChanger.ChangeTexture(setup, powerUpDuration);
 
         StartCoroutine(HideObject());
     }

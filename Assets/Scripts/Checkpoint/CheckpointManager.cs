@@ -21,6 +21,17 @@ public class CheckpointManager : MonoBehaviour
     public int lastCheckpoint = 0;
     public List<CheckpointBase> checkpoints;
 
+    public static void ResetCheckpoints()
+    {
+        _instance.lastCheckpoint = 0;
+        _instance.checkpoints.ForEach(i => i.TurnOff());
+    }
+
+    public static int GetLastCheckpoint()
+    {
+        return _instance.lastCheckpoint;
+    }
+
     public static void SaveCheckpoint(int i)
     {
         if (i > _instance.lastCheckpoint)
@@ -31,6 +42,11 @@ public class CheckpointManager : MonoBehaviour
 
     public static Vector3 GetRespawnPosition()
     {
+        if (!HasCheckpoint())
+        {
+            return Player._instance.GetInitialPosition();
+        }
+
         var checkpoint = _instance.checkpoints.Find(i => i.key == _instance.lastCheckpoint);
         return checkpoint.transform.position;
     }
