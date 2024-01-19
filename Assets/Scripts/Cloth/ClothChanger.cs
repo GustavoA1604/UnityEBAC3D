@@ -26,7 +26,6 @@ public class ClothChanger : MonoBehaviour
             if (_currrentTextureCounter < 0)
             {
                 ResetTexture();
-                _currrentTextureCounter = 0;
             }
         }
     }
@@ -36,10 +35,11 @@ public class ClothChanger : MonoBehaviour
         mesh.materials[0].SetTexture(shaderIdName, setup.texture);
     }
 
-    private void ResetTexture()
+    public void ResetTexture()
     {
         mesh.materials[0].SetTexture(shaderIdName, _defaultTexture);
         _currentSetup = null;
+        _currrentTextureCounter = 0;
     }
 
     public void ChangeTexture(ClothSetup setup, float duration)

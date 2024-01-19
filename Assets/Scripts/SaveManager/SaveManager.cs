@@ -57,6 +57,7 @@ public class SaveManager : MonoBehaviour
         Player._instance.healthBase.Init();
         Player._instance.MoveToPosition(Player._instance.GetInitialPosition());
         CheckpointManager.ResetCheckpoints();
+        Player._instance.clothChanger.ResetTexture();
     }
 
     public void SaveCurrentState()
