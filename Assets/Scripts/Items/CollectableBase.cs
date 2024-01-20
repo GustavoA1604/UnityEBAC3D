@@ -11,6 +11,7 @@ public class CollectableBase : MonoBehaviour
     public GameObject graphicItem;
 
     [Header("Sound")]
+    public SfxType sfxType = SfxType.NONE;
     public AudioSource audioSourceOnCollect;
     private bool _isCollected = false;
 
@@ -49,6 +50,7 @@ public class CollectableBase : MonoBehaviour
         {
             audioSourceOnCollect?.Play();
         }
+        SfxPool.Play(sfxType);
         ItemManager.AddItem(itemType);
     }
 

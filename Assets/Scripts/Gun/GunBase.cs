@@ -6,6 +6,7 @@ public class GunBase : MonoBehaviour
 {
     public ProjectileBase prefabProjectile;
     public Transform positionToShoot;
+    public SfxType sfxType = SfxType.NONE;
     public float timeBetweenShoots = .2f;
     public float speed = 50f;
     private Coroutine _currentCoroutine = null;
@@ -25,6 +26,7 @@ public class GunBase : MonoBehaviour
         projectile.transform.position = positionToShoot.position;
         projectile.transform.rotation = positionToShoot.rotation;
         projectile.speed = speed;
+        SfxPool.Play(sfxType);
     }
 
     public void StartShoot()

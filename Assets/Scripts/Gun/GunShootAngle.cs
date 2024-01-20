@@ -19,5 +19,6 @@ public class GunShootAngle : GunShootLimit
             projectile.speed = speed;
             projectile.transform.parent = null;
         }
+        SfxPool.Play(sfxType);
     }
 }

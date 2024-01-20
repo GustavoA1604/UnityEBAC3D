@@ -80,6 +80,7 @@ MonoBehaviour:
   compareTag: Player
   myParticleSystem: {fileID: 0}
   graphicItem: {fileID: 4932873078778172067}
+  sfxType: 1
   audioSourceOnCollect: {fileID: 0}
 --- !u!135 &5238948865800692760
 SphereCollider:

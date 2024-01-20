@@ -96,6 +96,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prefabProjectile: {fileID: 7234029726390713666, guid: b4d0bad05c2b09f408ca35b18ab2d371, type: 3}
   positionToShoot: {fileID: 0}
+  sfxType: 3
   timeBetweenShoots: 0.2
   speed: 50
   uIFillUpdaters: []
