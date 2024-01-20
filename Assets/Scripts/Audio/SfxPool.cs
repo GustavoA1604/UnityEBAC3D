@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
 
 public class SfxPool : MonoBehaviour
 {
@@ -24,6 +25,7 @@ public class SfxPool : MonoBehaviour
     public int poolSize = 10;
 
     private int _index = 0;
+    public AudioMixerGroup mixerGroup;
 
     private void CreatePool()
     {
@@ -37,10 +39,11 @@ public class SfxPool : MonoBehaviour
 
     private void CreateAudioSourceItem()
     {
-
         GameObject go = new GameObject("SFX_Pool");
         go.transform.SetParent(gameObject.transform);
-        _audioSourceList.Add(go.AddComponent<AudioSource>());
+        AudioSource audioSource = go.AddComponent<AudioSource>();
+        _audioSourceList.Add(audioSource);
+        audioSource.outputAudioMixerGroup = mixerGroup;
     }
 
     private void PlayInternal(SfxType sfxType)
